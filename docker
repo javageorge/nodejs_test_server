@@ -1,0 +1,14 @@
+FROM alpine 3.7
+
+#Update
+RUN apk add --update nodejs 
+
+# Install app dependencies
+COPY package.json /javageorge/nodejs_test_server/package.json
+RUN cd /javageorge/nodejs_test_server; npm install
+
+# Bundle app source
+COPY . /javageorge/nodejs_test_server
+
+EXPOSE 3000
+CMD ["node", "/javageorge/nodejs_test_server/index.js"]
